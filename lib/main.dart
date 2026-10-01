@@ -55,7 +55,7 @@ class LantawApp extends StatelessWidget {
       Provider<GetMediaDetails>(create: (_) => GetMediaDetails(repository)),
     ],
     child: MaterialApp(
-      title: 'Lantaw',
+      title: 'My Roxane Movies',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.dark,
       home: const AppShell(),
