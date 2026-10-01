@@ -1,0 +1,160 @@
+! Lantaw curated filter list (Adblock Plus / uBlock Origin syntax).
+! Loaded into Brave's adblock-rust engine (see lib/core/config/ad_blocking.dart).
+! Network rules target known ad/tracking/popunder domains seen on the
+! streaming mirror sites embedded in the player. Cosmetic rules hide leftover
+! ad containers that the network layer alone won't remove.
+
+! Two tiers of network rule live below. Third-party ad/popunder/tracking
+! domains are safe to block on sight: no mirror serves video from them, so a
+! wrong entry costs nothing. First-party rules naming a mirror's own host are
+! the opposite — they must come from watching that host's traffic, because a
+! path guessed wrong either blocks nothing or takes the stream down with it.
+
+! -- Third-party ad, tracking and popunder networks ----------------------
+||doubleclick.net^
+||googlesyndication.com^
+||googleadservices.com^
+||adservice.google.com^
+||googletagmanager.com^
+||google-analytics.com^
+||popads.net^
+||popcash.net^
+||propellerads.com^
+||exoclick.com^
+||exosrv.com^
+||trafficjunky.net^
+||juicyads.com^
+||adsterra.com^
+||monetag.com^
+||onclicka.com^
+||pushground.com^
+||histats.com^
+||scorecardresearch.com^
+||taboola.com^
+||outbrain.com^
+||mgid.com^
+||clickadu.com^
+||hilltopads.net^
+||onclickperformance.com^
+||realsrv.com^
+||adnxs.com^
+||criteo.com^
+||criteo.net^
+||media.net^
+||smartadserver.com^
+||adcolony.com^
+||bidvertiser.com^
+||yllix.com^
+||adcash.com^
+||revcontent.com^
+||moatads.com^
+||adsafeprotected.com^
+||doubleverify.com^
+||adroll.com^
+||pubmatic.com^
+||rubiconproject.com^
+||casalemedia.com^
+||evadav.com^
+||coinzilla.com^
+||a-ads.com^
+||clickaine.com^
+||ewyvzyykjlpcu.site^
+! Aclib serves the runPop popunder whose overlay the popup guard script and
+! the ###dontfoid / ##[znid] rules below only clean up after the fact.
+||aclib.net^
+||acscdn.com^
+||tsyndicate.com^
+||trafficstars.com^
+||ad-maven.com^
+||adspyglass.com^
+||adsco.re^
+||galaksion.com^
+||poptm.com^
+||zeydoo.com^
+||rtmark.net^
+||bidgear.com^
+||adnium.com^
+||vidoomy.com^
+||adskeeper.com^
+||googletagservices.com^
+
+! -- Observed on the mirrors, 2026-08-23 -------------------------------
+! Recorded with the request probe (--dart-define=LANTAW_PROBE=true) while
+! playing one film on each mirror. Every host below served advertising,
+! popunders or telemetry; none of them carried video, subtitles or artwork.
+
+! The popunder and click-tracking chain shared by vidsrc.to and cinesrc.st.
+! 484r.com/apu.php is the popunder entry point; the numeric hosts serve its
+! zone requests, impressions and click beacons.
+||484r.com^
+||041gg.com^
+||071kk.com^
+||405kk.com^
+||ay267.com^
+||bblaa.com^
+||llvpn.com^
+||luugy.com^
+||92mim.com^
+||vr-gc.com^
+||tzegilo.com^
+||fleraprt.com^
+||aichouphaugn.com^
+||clackafshar.shop^
+||magauch.pro^
+! Rotating throwaway hosts; these three were the ones seen serving.
+||torassquegs.qpon^
+||poppetsflavine.qpon^
+||soutenusperminexpends.qpon^
+
+! Analytics and session recording.
+||mc.yandex.ru^
+||clarity.ms^
+||static.cloudflareinsights.com^
+! cinesrc's own analytics endpoints. Its video comes from bright67.online,
+! so blocking these subdomains does not touch playback.
+||a.cineflix.st^
+||a2.cineflix.st^
+
+! -- First-party mirror endpoints ----------------------------------------
+! Observed by watching the host itself. Only vidlink has been profiled; the
+! other mirrors are covered by the third-party rules above until someone
+! records what they actually request.
+||vidlink.pro/api/mercury^
+||vidlink.pro/api/venus^
+! Cloudflare's real-user-monitoring beacon, served from each mirror's own
+! host. Telemetry only.
+||vidlink.pro/cdn-cgi/rum^
+||vidsrc.to/cdn-cgi/rum^
+||cinesrc.st/cdn-cgi/rum^
+
+! -- Cosmetic filters (generic element hiding) ---------------------------
+##.adsbygoogle
+##ins.adsbygoogle
+##[id^="google_ads_iframe"]
+##[id^="div-gpt-ad"]
+##[class*="gpt-ad"]
+##[class*="popunder"]
+##[id*="popunder"]
+##[class*="popup-ad"]
+##[id*="popup-ad"]
+##[class*="ad-popup"]
+##[id*="ad-popup"]
+##[class*="ad-container"]
+##[id*="ad-container"]
+##[class*="ad-banner"]
+##[id*="ad-banner"]
+##[class*="banner-ad"]
+##[id*="banner-ad"]
+##[class*="advertisement"]
+##[id*="advertisement"]
+##[class*="sponsor"]
+##[id*="sponsor"]
+##[class*="vast"]
+##[id*="vast"]
+##[class*="vpaid"]
+##[id*="vpaid"]
+##[data-ad]
+##[data-ad-slot]
+##[data-native-ad]
+###dontfoid
+##[znid]
